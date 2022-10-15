@@ -11,7 +11,7 @@ Swift Package Manager:
 
 ```
 dependencies: [
-    .package(url: "https://github.com/ntsh/FilePreviews.git", .upToNextMajor(from: "0.1"))
+    .package(url: "https://github.com/ntsh/FilePreviews.git", .upToNextMajor(from: "0.1.0"))
 ]
 ```
 
