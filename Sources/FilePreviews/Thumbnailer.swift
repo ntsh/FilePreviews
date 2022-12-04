@@ -1,10 +1,10 @@
 import Foundation
 import QuickLook
 
-@MainActor
+
 public class Thumbnailer: ObservableObject {
-    @Published var thumbnail: CGImage?
-    @Published var imageLabel = "Thumbnail" // Potentially generate this based on image content
+    @MainActor @Published var thumbnail: CGImage?
+    @MainActor @Published var imageLabel = "Thumbnail" // Potentially generate this based on image content
 
     public func generateThumbnail(_ url: URL, size: CGSize = CGSize(width: 400, height: 400)) {
         let request = QLThumbnailGenerator.Request(fileAt: url, size: size, scale: (UIScreen.main.scale), representationTypes: .all)
@@ -12,7 +12,9 @@ public class Thumbnailer: ObservableObject {
 
         Task {
             let representation = try? await generator.generateBestRepresentation(for: request)
-            thumbnail = representation?.cgImage
+            await MainActor.run {
+                thumbnail = representation?.cgImage
+            }
         }
     }
 }
