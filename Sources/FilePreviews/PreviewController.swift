@@ -1,6 +1,7 @@
 import SwiftUI
 import QuickLook
 
+#if os(iOS)
 public struct PreviewController: UIViewControllerRepresentable {
     public let url: URL
     @Binding var isPresented: Bool
@@ -49,3 +50,4 @@ public struct PreviewController: UIViewControllerRepresentable {
         }
     }
 }
+#endif
